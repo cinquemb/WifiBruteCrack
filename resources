@@ -4,3 +4,6 @@
 
 //Command when launching
 //airport -s
+
+//Command to login to netowrk
+//networksetup -setairportnetwork Airport [router SSID] [password]
