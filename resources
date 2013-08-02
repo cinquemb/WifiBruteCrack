@@ -12,3 +12,6 @@
 
 //Command to login to netowrk
 //networksetup -setairportnetwork Airport [router SSID] [password]
+
+
+//add on start up, or run during an specified interval to maintain connection in motion thru dense airways
