@@ -4,9 +4,11 @@
 
 //Command when launching
 //airport -s
-
-//Command to login to netowrk
-//networksetup -setairportnetwork Airport [router SSID] [password]
+//store in memory
 
 
 //use paswords.csv avec import os, csv, sys
+//store in memory
+
+//Command to login to netowrk
+//networksetup -setairportnetwork Airport [router SSID] [password]
