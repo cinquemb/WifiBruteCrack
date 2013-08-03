@@ -16,8 +16,11 @@
 
 //add on start up, or run during an specified interval to maintain connection in motion thru dense airways
 
-#command to not save network if succesful conneciton
-airport prefs RememberRecentNetworks=NO
+//command to not save network if succesful conneciton
+//airport prefs RememberRecentNetworks=NO
 
-#command to run at complete of script
-airport prefs RememberRecentNetworks=YES
+//command to run at complete of script
+//airport prefs RememberRecentNetworks=YES
+
+//C wrapper to run multiple threads?
+//python manager to import xml, and run mupiple threads?
