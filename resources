@@ -25,6 +25,8 @@
 //(1 password *7 seconds *5 combos *x neworks)/60 seconds
 //or  (1 password *7 seconds *5 combos)/60 seconds and x networks conncurently
 
+//8 passwords from file per min over all networks n, if n is within thread/memory limit per cpu.
+
 //C wrapper to run multiple threads (python maganer to imort xml, then launch thread for each network concurrently)?
 //python manager to import xml, and run mupiple threads?
 // try to connect different networks at same time with same passwords to cut by multiple of pass combo and networks in range?
