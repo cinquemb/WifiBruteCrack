@@ -26,7 +26,7 @@
 //or  (1 password *7 seconds *5 combos)/60 seconds and x networks conncurently
 
 //8 top frequent passwords (~%14) from file per ~min over all networks n, if n is within thread/memory limit per cpu.
-//100 top frequent ppasswords (~%50) from file per ~12.5 min over all networks n, if n is within thread/memory limit per cpu.
+//100 top frequent ppasswords (~%40) from file per ~12.5 min over all networks n, if n is within thread/memory limit per cpu.
 //1,000 top frequent ppasswords (~%91) from file per ~125 min over all networks n, if n is within thread/memory limit per cpu.
 //10,000 top frequent ppasswords(~%99.8) from file per ~1,250 min (~20.9 hours) over all networks n, if n is within thread/memory limit per cpu.
 //with 21 rasberrypi's (1 master , 21 slaves) means ~3 secs for top 8, ~38 seconds for top 100, ~6.25 min for top 1,000, ~62.5 min for top 10,000
