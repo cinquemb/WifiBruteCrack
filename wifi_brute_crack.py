@@ -85,7 +85,7 @@ def process_element(itera,elem,networks):
 
 			if output:
 				#if connection is succesful
-				print 'Network Name: %s\n Network SSID: %s\n Network Password: %s\n' % (net_names_array[i],net_data[i],alllow_pass)
+				print ('Network Name: %s\n Network SSID: %s\n Network Password: %s\n' % (net_names_array[i],net_data[i],alllow_pass))
 				sys.exit()
 	
 
